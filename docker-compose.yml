@@ -1,0 +1,42 @@
+version: '3.7'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: docker/app/Dockerfile
+    entrypoint: '/app/docker/app/entrypoint.dev.sh'
+    ports:
+      - '8000:8000'
+    links:
+      - db
+    depends_on:
+      - db
+    volumes:
+      - .:/app:cached
+    command: poetry run ./manage.py runserver 0.0.0.0:8000
+    environment:
+      DB_NAME: 'quiz_db'
+      DB_USER: 'quiz'
+      DB_PASSWORD: 'docker'
+      DB_HOST: 'db'
+      DB_PORT: '5432'
+  frontend:
+    build:
+      context: .
+      dockerfile: docker/app/Dockerfile
+    entrypoint: '/app/docker/frontend/entrypoint.dev.sh'
+    ports:
+      - '8080:8080'
+    volumes:
+        - .:/app:cached
+    command: yarn run build --watch
+  db:
+    image: postgres:11.2
+    ports:
+      - "3306:3306"
+    environment:
+      POSTGRES_USER: 'quiz'
+      POSTGRES_PASSWORD: 'docker'
+      POSTGRES_DB: 'quiz_db'
+volumes:
+  storage:
