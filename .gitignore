@@ -1,8 +1,32 @@
-gibo 2.1.0 by Simon Whitaker <sw@netcetera.org>
-https://github.com/simonwhitaker/gibo
-gibo 2.1.0 by Simon Whitaker <sw@netcetera.org>
-https://github.com/simonwhitaker/gibo
-### https://raw.github.com/github/gitignore/967cd6479319efde70a6fa44fa1bfa02020f2357/Python.gitignore
+.DS_Store
+node_modules
+/dist
+
+# local env files
+.env.local
+.env.*.local
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+local/
+static/
+__pycache__/
+
+db.sqlite3
+
+### https://raw.github.com/github/gitignore/6ffcee971119154f1188666c92d94248fa053b8e/Python.gitignore
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -26,6 +50,8 @@ parts/
 sdist/
 var/
 wheels/
+pip-wheel-metadata/
+share/python-wheels/
 *.egg-info/
 .installed.cfg
 *.egg
@@ -44,6 +70,7 @@ pip-delete-this-directory.txt
 # Unit test / coverage reports
 htmlcov/
 .tox/
+.nox/
 .coverage
 .coverage.*
 .cache
@@ -78,8 +105,19 @@ target/
 # Jupyter Notebook
 .ipynb_checkpoints
 
+# IPython
+profile_default/
+ipython_config.py
+
 # pyenv
 .python-version
+
+# pipenv
+#   According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.
+#   However, in case of collaboration, if having platform-specific dependencies or dependencies
+#   having no cross-platform support, pipenv may install dependencies that don’t work, or not
+#   install all needed dependencies.
+#Pipfile.lock
 
 # celery beat schedule file
 celerybeat-schedule
@@ -108,5 +146,10 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
 
 
