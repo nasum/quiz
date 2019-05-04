@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # models apps
     'modules.questions',
+    # thirdparty
+    'graphene_django',
 ]
 
 MIDDLEWARE = [
@@ -132,3 +134,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(PROJECT_ROOT, 'static'),
 )
+
+GRAPHENE = {
+    'SCHEMA': 'application.schema.schema.schema' # Where your Graphene schema lives
+}
