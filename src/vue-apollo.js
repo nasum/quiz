@@ -9,26 +9,33 @@ Vue.use(VueApollo);
 const AUTH_TOKEN = "apollo-token";
 
 const httpEndpoint =
-  process.env.VUE_APP_GRAPHQL_HTTP || "http://localhost:8000/graphql";
+  process.env.VUE_APP_GRAPHQL_HTTP || "http://localhost:8000/graphql/";
 
 export const filesRoot =
   process.env.VUE_APP_FILES_ROOT ||
   httpEndpoint.substr(0, httpEndpoint.indexOf("/graphql"));
 
 Vue.prototype.$filesRoot = filesRoot;
-
+console.log(document.querySelector('input[name=csrfmiddlewaretoken]'))
 const defaultOptions = {
   httpEndpoint,
   tokenName: AUTH_TOKEN,
   persisting: false,
-  ssr: false
+  ssr: false,
+  httpLinkOptions: {
+    headers: {
+      'X-CSRFToken': document.querySelector('input[name=csrfmiddlewaretoken]').getAttribute('value'),
+    }
+  }
 };
 
 export function createProvider(options = {}) {
   const { apolloClient } = createApolloClient({
     ...defaultOptions,
-    ...options
+    ...options,
   });
+
+  console.log(apolloClient)
 
   const apolloProvider = new VueApollo({
     defaultClient: apolloClient,

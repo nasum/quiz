@@ -1,5 +1,10 @@
 module.exports = {
   publicPath: "/static/",
-  indexPath: "../templates/index.html",
-  outputDir: "./application/static"
+  outputDir: "./application/static",
+  pages: {
+    index: {
+      entry: "src/main.ts",
+      template: "src/index.html"
+    }
+  }
 };
