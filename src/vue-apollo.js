@@ -16,7 +16,7 @@ export const filesRoot =
   httpEndpoint.substr(0, httpEndpoint.indexOf("/graphql"));
 
 Vue.prototype.$filesRoot = filesRoot;
-console.log(document.querySelector('input[name=csrfmiddlewaretoken]'))
+
 const defaultOptions = {
   httpEndpoint,
   tokenName: AUTH_TOKEN,
@@ -34,8 +34,6 @@ export function createProvider(options = {}) {
     ...defaultOptions,
     ...options,
   });
-
-  console.log(apolloClient)
 
   const apolloProvider = new VueApollo({
     defaultClient: apolloClient,

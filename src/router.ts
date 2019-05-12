@@ -1,7 +1,9 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
-import Setting from "./views/Setting.vue"
+import Terms from "./views/Terms.vue"
+import TermsIndex from "./views/terms/Index.vue"
+import TermsShow from "./views/terms/Show.vue"
 
 Vue.use(Router);
 
@@ -14,9 +16,21 @@ export default new Router({
       component: Home
     },
     {
-      path: "/setting",
-      name: "setting",
-      component: Setting
+      path: "/terms",
+      name: "terms",
+      component: Terms,
+      children: [
+        {
+          path: "",
+          name: "index",
+          component: TermsIndex
+        },
+        {
+          path: ":id",
+          name: 'show',
+          component: TermsShow
+        }
+      ]
     }
   ]
 });

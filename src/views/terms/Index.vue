@@ -1,12 +1,11 @@
 <template>
-<div>
-  <h1>Setting</h1>
-  <ul>
-    <li v-for="term in terms" :key="term">
+<ul>
+  <li v-for="term in terms" :key="term.id">
+    <router-link :to="`/terms/${term.id}`">
       {{term.title}}
-    </li>
-  </ul>
-</div>
+    </router-link>
+  </li>
+</ul>
 </template>
 
 <script lang="ts">
@@ -14,9 +13,11 @@ import Vue from 'vue'
 import gql from 'graphql-tag'
 
 export default Vue.extend({
+  name: 'Index',
   apollo: {
     terms: gql`query{
       terms {
+        id,
         title
       }
     }`

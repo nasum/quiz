@@ -1,8 +1,8 @@
 <template>
   <div class="home">
     root
-    <router-link to="/setting">
-      setting
+    <router-link to="/terms/">
+      terms
     </router-link>
   </div>
 </template>
