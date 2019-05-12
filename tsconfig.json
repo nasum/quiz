@@ -2,7 +2,6 @@
   "compilerOptions": {
     "target": "es5",
     "module": "esnext",
-    "strict": true,
     "jsx": "preserve",
     "importHelpers": true,
     "moduleResolution": "node",
@@ -11,6 +10,7 @@
     "sourceMap": true,
     "baseUrl": ".",
     "allowJs": true,
+    "noImplicitAny": true,
     "types": [
       "webpack-env"
     ],

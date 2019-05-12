@@ -4,6 +4,9 @@ import Home from "./views/Home.vue";
 import Terms from "./views/Terms.vue"
 import TermsIndex from "./views/terms/Index.vue"
 import TermsShow from "./views/terms/Show.vue"
+import Quiz from "./views/Quiz.vue"
+import QuizIndex from "./views/quiz/Index.vue"
+import QuizShow from "./views/quiz/Show.vue"
 
 Vue.use(Router);
 
@@ -29,6 +32,23 @@ export default new Router({
           path: ":id",
           name: 'show',
           component: TermsShow
+        }
+      ]
+    },
+    {
+      path: "/quiz",
+      name: "quiz",
+      component: Quiz,
+      children: [
+        {
+          path: "/",
+          name: "QuizIndex",
+          component: QuizIndex
+        },
+        {
+          path: ":id",
+          name: "QuizShow",
+          component: QuizShow
         }
       ]
     }
