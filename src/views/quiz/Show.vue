@@ -1,16 +1,16 @@
 <template>
   <div>
     <h1>{{term.title}}</h1>
-    <div>
+    <div class="content">
       <h2>{{term.questionsSet[this.index].description}}</h2>
       <ul>
         <li v-for="answer in term.questionsSet[this.index].answersSet" :key="answer.id">
-          <label><input type="radio" name="answer" value="answer.right">{{answer.description}}</label>
+          <input type="radio" name="answer" :value="answer.right" :id="answer.id"><label :for="answer.id">{{answer.description}}</label>
         </li>
       </ul>
-    </div>
-    <div @click="next">
-      next
+      <div class="next" @click="next">
+        つぎへ
+      </div>
     </div>
   </div>
 </template>
@@ -56,4 +56,54 @@ export default Vue.extend({
   } 
 })
 </script>
+
+<style lang="scss" scoped>
+h1 {
+  background: #002F89;
+  color: #fff;
+  margin: 0;
+  padding: 5px;
+}
+
+.content {
+  padding: 5px;
+}
+
+ul {
+  padding: 0;
+}
+
+li {
+  display: inline-block;
+  list-style: none;
+  width: 50%;
+}
+
+input[type=radio] {
+  display: none;
+}
+
+input[type="radio"]:checked + label {
+  background: #31A9EE;
+  color: #ffffff;
+}
+
+label {
+  box-sizing: border-box;
+  padding: 5px;
+  display: block;
+  border: 1px solid #006DD9;
+  width: 100%;
+  cursor: pointer;
+  text-align: center;
+}
+
+.next {
+  text-align: center;
+  border: 1px solid #006DD9;
+  box-sizing: border-box;
+  padding: 5px;
+  cursor: pointer;
+}
+</style>
 
