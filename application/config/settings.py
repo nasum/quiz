@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 import sys
+import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 PROJECT_ROOT = os.path.dirname(os.path.dirname(__file__))
@@ -138,3 +139,5 @@ STATICFILES_DIRS = (
 GRAPHENE = {
     'SCHEMA': 'application.schema.schema.schema' # Where your Graphene schema lives
 }
+
+django_heroku.settings(locals())
