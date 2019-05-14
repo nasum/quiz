@@ -4,6 +4,7 @@ import Home from "./views/Home.vue";
 import Terms from "./views/Terms.vue"
 import TermsIndex from "./views/terms/Index.vue"
 import TermsShow from "./views/terms/Show.vue"
+import TermsNew from "./views/terms/New.vue"
 import Quiz from "./views/Quiz.vue"
 import QuizIndex from "./views/quiz/Index.vue"
 import QuizShow from "./views/quiz/Show.vue"
