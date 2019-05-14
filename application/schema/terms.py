@@ -4,13 +4,15 @@ from modules.questions.models import Questions, Terms, Answers
 from schema.questions import QuestionsType, QuestionsInputType
 from schema.answers import AnswersType
 
+
 class TermType(DjangoObjectType):
     class Meta:
         model = Terms
-    
+
     id = graphene.ID()
     title = graphene.String()
     questions = graphene.List(QuestionsType)
+
 
 class CreateTerm(graphene.Mutation):
     term = graphene.Field(TermType)
@@ -20,7 +22,7 @@ class CreateTerm(graphene.Mutation):
     class Arguments:
         title = graphene.String(required=True)
         questions = graphene.List(QuestionsInputType)
-    
+
     def mutate(self, info, title, questions):
         term = Terms.objects.create(title=title)
 
@@ -29,4 +31,4 @@ class CreateTerm(graphene.Mutation):
             for answer in question.answers:
                 answer = Answers.objects.create(questions=question_obj, description=answer.description)
 
-        return CreateTerm(term)
+        return CreateTerm(term=term)

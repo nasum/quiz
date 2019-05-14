@@ -1,9 +1,10 @@
 import graphene
-from graphene_django import DjangoObjectType
-from modules.questions.models import Answers, Questions, Terms
+
+from modules.questions.models import Answers, Questions, Terms, UserAnswer
 from schema.answers import AnswersType
 from schema.questions import QuestionsType
 from schema.terms import CreateTerm, TermType
+from schema.user_answer import CreateUserAnswer, UserAnswerType
 
 
 class Query(graphene.ObjectType):
@@ -11,6 +12,7 @@ class Query(graphene.ObjectType):
     terms = graphene.List(TermType)
     questions = graphene.List(QuestionsType)
     answers = graphene.List(AnswersType)
+    user_answers = graphene.List(UserAnswerType)
 
     def resolve_term(self, info, id):
         return Terms.objects.get(pk=id)
@@ -24,7 +26,13 @@ class Query(graphene.ObjectType):
     def resolve_answers(self, info):
         return Answers.objects.all()
 
+    def resolve_user_answer(self, info):
+        return UserAnswer.objects.all()
+
+
 class MyMutations(graphene.ObjectType):
     create_term = CreateTerm.Field()
+    create_user_answer = CreateUserAnswer.Field()
+
 
 schema = graphene.Schema(query=Query, mutation=MyMutations)
