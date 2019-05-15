@@ -2,14 +2,34 @@
   <div>
     <h1>{{term.title}}</h1>
     <div class="content">
-      <h2>{{term.questionsSet[this.index].description}}</h2>
-      <ul>
-        <li v-for="answer in term.questionsSet[this.index].answersSet" :key="answer.id">
-          <input type="radio" name="answer" :value="answer.right" :id="answer.id"><label :for="answer.id">{{answer.description}}</label>
-        </li>
-      </ul>
-      <div class="next" @click="next">
-        つぎへ
+      <div v-if="step === 0">
+        <input type="text" v-model="userId">
+        <div class="next" @click="goQuiz">
+          つぎへ
+        </div>
+      </div>
+      <div v-else-if="step === 1">
+        <h2>{{term.questionsSet[this.index].description}}</h2>
+        <ul>
+          <li v-for="answer in term.questionsSet[this.index].answersSet" :key="answer.id">
+            <input type="radio" name="answer" :value="answer.right" :id="answer.id" @click="setAnswer(answer.id)"><label :for="answer.id">{{answer.description}}</label>
+          </li>
+        </ul>
+        <div class="next" @click="next">
+          つぎへ
+        </div>
+      </div>
+      <div v-else>
+        <h2>クイズの結果</h2>
+        <table>
+          <tr v-for="(answer, index) in answerHistory" :key="index">
+            <td>第{{index + 1}}問目</td>
+            <td>
+              <span v-if="answer">○</span>
+              <span v-else>×</span>
+            </td>
+          </tr>
+        </table>
       </div>
     </div>
   </div>
@@ -24,12 +44,59 @@ export default Vue.extend({
   data() {
     return {
       index: 0,
-      term: null
+      term: null,
+      userId: '',
+      answerId: null,
+      step: 0,
+      answerHistory: [],
     }
   },
   methods: {
-    next(){
-      this.index += 1
+    goQuiz(){
+      if(this.user_Id !== '') {
+        this.step = 1
+      }
+    },
+    setAnswer(id: number){
+      this.answerId = id
+    },
+    async next(){
+      if(!confirm('次の問題に進みますか？')){
+        return
+      }
+      await this.$apollo.mutate({
+        // Query
+        mutation: gql`
+        mutation($answersId: Int!, $userId: String!){
+          createUserAnswer(answersId: $answersId, userId: $userId){
+           userAnswer{
+              answersId
+           }
+          }
+        }
+        `,
+        // Parameters
+        variables: {
+          answersId: this.answerId,
+          userId: this.userId
+        }
+      })
+
+      const answer = this.term.questionsSet[this.index].answersSet.find((answer: any) => answer.id == this.answerId)
+
+      if(answer.right) {
+        this.answerHistory.push(true)
+      } else {
+        this.answerHistory.push(false)
+      }
+
+      if ((this.term.questionsSet.length - 1) == this.index) {
+        alert('終了')
+        this.step = 2
+      } else {
+        this.index += 1
+        this.answerId = null
+      }
     }
   },
   apollo: {
@@ -43,6 +110,7 @@ export default Vue.extend({
             answersSet {
               id
               description
+              right
             }
           }
         }
