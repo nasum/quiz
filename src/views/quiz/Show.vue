@@ -182,15 +182,15 @@ label {
   cursor: pointer;
 }
 
-  .user_name_input {
-    width: 100%;
-    border:0;
-    padding:10px;
-    font-size:1.3em;
-    font-family:Arial, sans-serif;
-    color:#aaa;
-    border:solid 1px #ccc;
-    margin-bottom: 20px;
-  }
+.user_name_input {
+  width: 100%;
+  border:0;
+  padding:10px;
+  font-size:1.3em;
+  font-family:Arial, sans-serif;
+  color:#aaa;
+  border:solid 1px #ccc;
+  margin-bottom: 20px;
+}
 </style>
 

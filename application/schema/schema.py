@@ -10,7 +10,10 @@ from schema.user_answer import CreateUserAnswer, UserAnswerType
 class Query(graphene.ObjectType):
     term = graphene.Field(TermType, id=graphene.ID())
     terms = graphene.List(TermType)
+
+    question = graphene.Field(QuestionsType, id=graphene.ID())
     questions = graphene.List(QuestionsType)
+
     answers = graphene.List(AnswersType)
     user_answers = graphene.List(UserAnswerType)
 
@@ -19,6 +22,9 @@ class Query(graphene.ObjectType):
 
     def resolve_terms(self, info):
         return Terms.objects.all()
+
+    def resolve_question(self, info, id):
+        return Questions.objects.get(pk=id)
 
     def resolve_questions(self, info):
         return Questions.objects.all()
