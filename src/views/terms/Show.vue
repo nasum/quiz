@@ -226,12 +226,15 @@ ul.totalResult {
     margin-left: 10px;
   }
   li:nth-child(1) span {
-    font-size: 50px;
+    font-size: 60px;
   }
   li:nth-child(2) span {
-    font-size: 40px;
+    font-size: 50px;
   }
   li:nth-child(3) span {
+    font-size: 40px;
+  }
+  li:nth-child(4) span {
     font-size: 30px;
   }
 }
