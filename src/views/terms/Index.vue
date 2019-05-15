@@ -155,4 +155,24 @@ li {
   margin: 5px;
   border: 1px solid black;
 }
+
+textarea {
+  width: 100%;
+  padding:10px;
+  font-size:1.3em;
+  font-family:Arial, sans-serif;
+  color:#aaa;
+  border:solid 1px #ccc;
+  margin-bottom: 20px;
+}
+
+input[type="text"] {
+  border:0;
+  padding:10px;
+  font-size:1.3em;
+  font-family:Arial, sans-serif;
+  color:#aaa;
+  border:solid 1px #ccc;
+  margin-bottom: 20px;
+}
 </style>
