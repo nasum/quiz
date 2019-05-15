@@ -1,6 +1,7 @@
 <template>
   <div>
-    <h1>{{term.questionsSet[this.index].description}}</h1>
+    <h1 v-if="!showTotalResult">{{term.questionsSet[this.index].description}}</h1>
+    <h1 v-else>最終結果</h1>
     <div class="content">
       <div v-if="!showTotalResult">
         <ul class="answers">
@@ -30,7 +31,6 @@
         </div>
       </div>
       <div v-else>
-        <h2>最終結果</h2>
         <ul class="totalResult">
           <li v-for="(result, index) in sortedResult()" :key="index">
             <span>
