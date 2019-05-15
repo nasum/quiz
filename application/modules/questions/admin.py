@@ -4,7 +4,7 @@ from .models import Answers, Questions, Terms, UserAnswer
 
 
 class AnswersAdmin(admin.ModelAdmin):
-    list_display = ('questions_id', 'description', 'right')
+    list_display = ('questions_id', 'description', 'right', 'img_url')
 
 
 class QuestionsAdmin(admin.ModelAdmin):

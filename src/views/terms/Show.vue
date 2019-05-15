@@ -6,7 +6,16 @@
         {{question.description}}
         <ul>
           <li v-for="answer in question.answersSet" :key="answer.id">
-            {{answer.description}}
+            <div>
+              {{answer.description}}
+            </div>
+            <div>
+              <img :src="answer.imgUrl" v-if="answer.imgUrl !== ''">
+            </div>
+            <div>
+              <span v-if="answer.right">○</span>
+              <span v-else>×</span>
+            </div>
           </li>
         </ul>
       </li>
@@ -31,6 +40,8 @@ export default Vue.extend({
             answersSet {
               id
               description
+              right
+              imgUrl
             }
           }
         }

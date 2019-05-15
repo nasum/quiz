@@ -24,7 +24,11 @@
                     <img v-if="answer.imgUrl !== ''" :src="answer.imgUrl" width="100">
                   </div>
                   <div>
-                    <label>正解<input type="radio" :name="'question' + q_index" v-model="answer.right"></label>
+                    <label>正解</label>
+                    <select v-model="answer.right">
+                      <option value="true">正解</option>
+                      <option value="false">不正解</option>
+                    </select>
                   </div>
                 </div>
               </li>
@@ -57,7 +61,7 @@ const QUESTION = {
     {
       description: "answer 1",
       imgUrl: "",
-      right: true
+      right: false
     },{
       description: "answer 2",
       imgUrl: "",
