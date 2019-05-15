@@ -6,7 +6,6 @@
       <div v-if="!showTotalResult">
         <ul class="answers">
           <li v-for="answer in term.questionsSet[this.index].answersSet" :key="answer.id">
-            <input type="radio" name="answer" :value="answer.right" :id="answer.id">
             <label :for="answer.id" :class="answer.right && right ? 'show_right' : ''">
               <div>
                 {{answer.description}}
