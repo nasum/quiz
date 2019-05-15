@@ -1,31 +1,34 @@
 <template>
   <div>
-    <h2>New Term</h2>
+    <h2>イベントの作成</h2>
     <div>
-      <label>Term title</label>:<input type="text" v-model="title"><br>
+      <label>イベント名</label>:<input type="text" v-model="title"><br>
       <ul>
-        <li v-for="(question, index) in questions" :key="index">
+        <li v-for="(question, q_index) in questions" :key="q_index">
           <div class="question">
-            <div>Question {{index}}</div>
+            <div><button @click="deleteQuestion(q_index)">×</button> Question {{q_index}}</div>
             <div>
-              <label>Question Description</label>:<textarea v-model="question.description"></textarea>
+              <label>問題 </label>:<textarea v-model="question.description"></textarea>
             </div>
             <ul>
               <li v-for="(answer, index) in question.answers" :key="index">
                 <div class="answer">
                   <div>
-                    Answer {{index}}
+                    答え {{index}}
                   </div>
                   <div>
-                    <label>Answer Description</label>:<input type="text" v-model="answer.description">
+                    <label>答え文字</label>:<input type="text" v-model="answer.description">
                   </div>
                   <div>
-                    <label>right</label><input type="radio" v-model="answer.right">
+                    <label>画像URL</label><input type="text" v-model="answer.imgUrl"><br>
+                    <img v-if="answer.imgUrl !== ''" :src="answer.imgUrl" width="100">
+                  </div>
+                  <div>
+                    <label>正解<input type="radio" :name="'question' + q_index" v-model="answer.right"></label>
                   </div>
                 </div>
               </li>
             </ul>
-            <button class="button" @click="addAnswer(question)">new Answer</button>
           </div>
         </li>
       </ul>
@@ -48,39 +51,41 @@
 import Vue from 'vue'
 import gql from 'graphql-tag'
 
+const QUESTION = {
+  description: "question 1",
+  answers: [
+    {
+      description: "answer 1",
+      imgUrl: "",
+      right: true
+    },{
+      description: "answer 2",
+      imgUrl: "",
+      right: false
+    },{
+      description: "answer 3",
+      imgUrl: "",
+      right: false
+    },{
+      description: "answer 4",
+      imgUrl: "",
+      right: false
+    },
+  ]
+}
+
 export default Vue.extend({
   name: 'Index',
   data: () => ({
     title: "term1",
-    questions: [{
-      description: "question 1",
-      answers: [
-        {
-          description: "answer 1",
-          right: false
-        }
-      ]
-    }]
+    questions: [JSON.parse(JSON.stringify(QUESTION))]
   }),
   methods: {
     addQuestion() {
-      this.questions.push({
-        description: "question 1",
-        answers: [
-          {
-            description: "answer 1",
-            right: false
-          }
-        ]
-      })
+      this.questions.push(JSON.parse(JSON.stringify(QUESTION)))
     },
-    addAnswer(question: any) {
-      question.answers.push(
-        {
-          description: "answer 1",
-          right: false
-        }
-      )
+    deleteQuestion(index: number) {
+      this.questions.splice(index, 1)
     },
     async register() {
       const result = await this.$apollo.mutate({
@@ -93,6 +98,7 @@ export default Vue.extend({
                 description
                 answersSet {
                   description
+                  imgUrl
                   right
                 }
               }
@@ -128,7 +134,7 @@ export default Vue.extend({
 })
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 ul {
   padding: 0
 }

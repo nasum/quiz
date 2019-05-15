@@ -3,7 +3,8 @@
     <h1>{{term.title}}</h1>
     <div class="content">
       <div v-if="step === 0">
-        <input type="text" v-model="userId">
+        IDを入力してください
+        <input class="user_name_input" type="text" v-model="userId">
         <div class="next" @click="goQuiz">
           つぎへ
         </div>
@@ -12,7 +13,13 @@
         <h2>{{term.questionsSet[this.index].description}}</h2>
         <ul>
           <li v-for="answer in term.questionsSet[this.index].answersSet" :key="answer.id">
-            <input type="radio" name="answer" :value="answer.right" :id="answer.id" @click="setAnswer(answer.id)"><label :for="answer.id">{{answer.description}}</label>
+            <input type="radio" name="answer" :value="answer.right" :id="answer.id" @click="setAnswer(answer.id)">
+            <label :for="answer.id">
+              <div>
+                {{answer.description}}
+                <img :src="answer.imgUrl" v-if="answer.imgUrl !== ''" width="100%">
+              </div>
+            </label>
           </li>
         </ul>
         <div class="next" @click="next">
@@ -53,7 +60,7 @@ export default Vue.extend({
   },
   methods: {
     goQuiz(){
-      if(this.user_Id !== '') {
+      if(this.userId !== '') {
         this.step = 1
       }
     },
@@ -110,6 +117,7 @@ export default Vue.extend({
             answersSet {
               id
               description
+              imgUrl
               right
             }
           }
@@ -173,5 +181,16 @@ label {
   padding: 5px;
   cursor: pointer;
 }
+
+  .user_name_input {
+    width: 100%;
+    border:0;
+    padding:10px;
+    font-size:1.3em;
+    font-family:Arial, sans-serif;
+    color:#aaa;
+    border:solid 1px #ccc;
+    margin-bottom: 20px;
+  }
 </style>
 

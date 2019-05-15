@@ -1,6 +1,6 @@
 <template>
   <div>
-    {{term.title}}
+    イベント名：{{term.title}}
     <ul>
       <li v-for="question in term.questionsSet" :key="question.id">
         {{question.description}}
@@ -45,3 +45,11 @@ export default Vue.extend({
 })
 </script>
 
+<style lang="scss" scoped>
+  ul {
+    padding: 0;
+  }
+  li {
+    list-style-type: none;
+  }
+</style>

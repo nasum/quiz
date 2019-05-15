@@ -29,6 +29,11 @@ class CreateTerm(graphene.Mutation):
         for question in questions:
             question_obj = Questions.objects.create(terms=term, description=question.description)
             for answer in question.answers:
-                answer = Answers.objects.create(questions=question_obj, description=answer.description)
+                Answers.objects.create(
+                    questions=question_obj,
+                    description=answer.description,
+                    img_url=answer.img_url,
+                    right=answer.right
+                )
 
         return CreateTerm(term=term)
