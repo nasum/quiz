@@ -32,15 +32,15 @@
       <div v-else>
         <h2>最終結果</h2>
         <ul class="totalResult">
-          <li v-for="result, key, index in totalResult" :key="result">
+          <li v-for="(result, index) in sortedResult()" :key="index">
             <span>
               {{index + 1}}位
             </span>
             <span>
-              {{result}}問正解
+              {{result[1]}}問正解
             </span>
             <span>
-              {{key}}
+              {{result[0]}}
             </span>
           </li>
         </ul>
@@ -93,6 +93,17 @@ export default Vue.extend({
           }
         })
       })
+    },
+    sortedResult() {
+      let sortable = [];
+      for (let result in this.totalResult) {
+        sortable.push([result, this.totalResult[result]]);
+      }
+
+      sortable.sort(function(a, b) {
+        return b[1] - a[1];
+      });
+      return sortable
     }
   },
   apollo: {
