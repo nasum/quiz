@@ -9,7 +9,7 @@
             <label :for="answer.id" :class="answer.right && right ? 'show_right' : ''">
               <div>
                 {{answer.description}}
-                <img :src="answer.imgUrl" v-if="answer.imgUrl !== ''" width="100%">
+                <img :src="answer.imgUrl" v-if="answer.imgUrl !== ''" class="answer_img">
               </div>
             </label>
           </li>
@@ -237,4 +237,9 @@ ul.totalResult {
     font-size: 30px;
   }
 }
+
+  .answer_img {
+    width: 100%;
+    max-width: 500px;
+  }
 </style>
