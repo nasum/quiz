@@ -3,7 +3,7 @@
     <h1>{{term.title}}</h1>
     <div class="content">
       <div v-if="step === 0">
-        IDを入力してください
+        お名前を入力してください
         <input class="user_name_input" type="text" v-model="userId">
         <div class="next" @click="goQuiz">
           つぎへ
