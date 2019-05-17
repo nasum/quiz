@@ -238,8 +238,8 @@ ul.totalResult {
   }
 }
 
-  .answer_img {
-    width: 100%;
-    max-width: 500px;
-  }
+.answer_img {
+  width: 100%;
+  max-width: 500px;
+}
 </style>

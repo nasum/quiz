@@ -17,7 +17,7 @@
             <label :for="answer.id">
               <div>
                 {{answer.description}}
-                <img :src="answer.imgUrl" v-if="answer.imgUrl !== ''" width="100%">
+                <img :src="answer.imgUrl" v-if="answer.imgUrl !== ''" class="answer_img">
               </div>
             </label>
           </li>
@@ -191,6 +191,11 @@ label {
   color:#aaa;
   border:solid 1px #ccc;
   margin-bottom: 20px;
+}
+
+.answer_img {
+  width: 100%;
+  max-width: 500px;
 }
 </style>
 
